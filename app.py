@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect
-from database import signup_to_db, login_from_db
+from database import signup_to_db, login_from_db, water_bill_db
 import random
 from datetime import date
 
@@ -36,9 +36,26 @@ def login_success():
   # return jsonify(data)
   
 
-@app.route("/login/gas")
+@app.route("/login/water")
 def gas():
-  return render_template('gas.html')
+  return render_template('water.html')
+
+@app.route("/water/first_time")
+def gas_first_time():
+  today=date.today()
+  id=random.randrange(100000,200000)
+  return render_template('water_first_time.html',today=today,id=id)
+
+@app.route("/water/bill", methods=['post'])
+def water_bill():
+  data= request.form
+  # return jsonify(data)
+  db_data=water_bill_db(data)
+  return render_template('pay_water_bill.html',db_data=db_data)
+
+@app.route("/login/bill_paid")
+def bill_paid():
+  return render_template('bill_paid.html')
   
 
 if __name__ =='__main__':

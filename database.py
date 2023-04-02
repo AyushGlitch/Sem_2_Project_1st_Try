@@ -38,3 +38,28 @@ def login_from_db(data):
     else:
       return (rows[0])
 
+def water_bill_db(data):
+  with engine.connect() as conn:
+    result = conn.execute(
+          text("select * from water where phone=:phone"),
+            {"phone": data['phone']}
+    )
+    rows = []
+    rows=[dict(zip(result.keys(), row)) for row in result]
+      
+    if len(rows) == 0:
+      with engine.connect() as conn:
+        query = text("INSERT INTO water (id, phone, email, last_bill_date) VALUES (:id, :phone, :email, :last_bill_date)")
+
+        conn.execute(query, { 
+                 'id':data['id'],
+                 'phone':data['phone'],
+                 'email':data['email'],                 
+                 'last_bill_date':data['today'],
+                 
+        })
+        water_bill_db(data)
+    
+    else:
+      return (rows[0])
+

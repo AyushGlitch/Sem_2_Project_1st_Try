@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include 'bootstrap.html' %}
+    <title>Pay Water Bill</title>
+  </head>
+  <body>
+    {% include 'nav3.html' %}
+    
+    <h1 class="text-center mt-4 mb-4">Water Bill Summary</h1>
+    <br>
+    <div class="container">
+      <b>Customer ID</b>
+      <div class="mb-2">{{db_data['id']}}</div>
+
+      <b>Registered Phone Number</b>
+      <div class="mb-2">{{db_data['phone']}}</div>
+
+      <b>Registered Email</b>
+      <div class="mb-2">{{db_data['email']}}</div>
+
+      <b>Bill</b>
+      <div class="mb-2">Rs.300</div>
+    </div>
+    <h4 class="text-center mt-4 mb-4">One-Click Pay: Press 'Pay Bill' button and bill will be paid automatically, deducting money from your account</h4>
+    <br>
+    <div class="text-center">
+    <a href="/login/bill_paid" type="button" class="btn btn-primary">Pay Bill</a>
+    </div>
+    <br><br>
+    
+  </body>
+</html>
