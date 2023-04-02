@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include 'bootstrap.html' %}
+    <title>Login</title>
+  </head>
+  <body>
+    {% include 'nav2.html' %}
+    
+    <h1 class="text-center mt-4 mb-4">Login</h1>
+    
+    <form action="/login/success" method="post">      
+      
+      <div class="container mt-4 mb-4">
+        <label>Username</label><br>
+        <input type="text" required name="username" placeholder="batman">
+      </div>
+
+      <div class="container mt-4 mb-4">
+        <label>Password</label><br>
+        <input type="password" required id="pwd" name="pwd">
+      </div>
+      
+      <div class="container mt-4 mb-4">
+        <input type="submit">
+      </div>
+    </form>
+    
+  </body>
+</html>
