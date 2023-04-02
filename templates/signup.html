@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include 'bootstrap.html' %}
+    <title>Sign Up</title>
+  </head>
+  <body>
+    {% include 'nav2.html' %}
+    
+    <h1 class="text-center mt-4 mb-4">Sign-Up Form</h1>
+    
+    <form action="/signup/apply" method="post">      
+      
+      <div class="container mt-4 mb-4">
+        <label>Full Name</label><br>
+        <input type="text" required name="full_name" placeholder="Bruce Wayne">
+      </div>
+  
+      <div class="container mt-4 mb-4">
+        <label>Email</label><br>
+        <input type="email" required name="email" placeholder="bruce@wayne.com">
+      </div>
+
+      <div class="container mt-4 mb-4">
+        <label>Username</label><br>
+        <input type="text" required name="username" placeholder="batman">
+      </div>
+
+      <div class="container mt-4 mb-4">
+        <label>Password</label><br>
+        <input type="password" required id="pwd" name="pwd">
+      </div>
+      
+      <div class="container mt-4 mb-4">
+        <label>Mobile Number</label><br>
+        <input type="tel" required name="phone" placeholder="123-456-7890" pattern="[0-9]{3}[0-9]{4}[0-9]{3}" >
+      </div>
+
+      <div class="container mt-4 mb-4">
+        <input type="submit">
+      </div>
+    </form>
+    
+  </body>
+</html>
