@@ -2,34 +2,25 @@
 <html>
   <head>
     {% include 'bootstrap.html' %}
-    <title>Gas First Time</title>
+    <title>Gas RePayment</title>
   </head>
   <body>
     {% include 'nav3.html' %}
     
-    <h1 class="text-center mt-4 mb-4">First Time Gas Bill Payment</h1>
+    <h1 class="text-center mt-4 mb-4">Gas Bill RePayment</h1>
     
     <form action="/gas/bill" method="post">      
       
+      
       <div class="container mt-4 mb-4">
-        <label>Customer ID</label><br>
-        <input type="number" name="id" value="{{id}}" readonly>
-      </div>
-
-      <div class="container mt-4 mb-4">
-        <label>Registered Phone Number</label><br>
+        <label>Enter Registered Phone Number</label><br>
         <input type="tel" required name="phone" placeholder="123-456-7890" pattern="[0-9]{3}[0-9]{4}[0-9]{3}" >
       </div>
   
-      <div class="container mt-4 mb-4">
-        <label>Registered Email</label><br>
-        <input type="email" required name="email" placeholder="bruce@wayne.com">
-      </div>
-
-      <div class="container mt-4 mb-4">
+    <div class="container mt-4 mb-4">
         <label>Today</label><br>
         <input type="text" name="today" value="{{today}}">
-      </div>
+      </div>    
 
       <div class="container mt-4 mb-4">
         <input type="submit">

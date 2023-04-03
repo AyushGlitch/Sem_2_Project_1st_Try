@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect
-from database import signup_to_db, login_from_db, water_bill_db, elec_bill_db, update_elec_last_bill_date, update_water_last_bill_date
+from database import signup_to_db, login_from_db, water_bill_db, elec_bill_db, gas_bill_db, update_elec_last_bill_date, update_water_last_bill_date, update_gas_last_bill_date
 import random
 from datetime import date, datetime
 
@@ -86,6 +86,17 @@ def elec_re():
   today=date.today()
   return render_template("elec_re.html", today=today)
 
+
+@app.route("/gas/re")
+def gas_re():
+  today=date.today()
+  return render_template("gas_re.html", today=today)
+
+@app.route("/water/re")
+def water_re():
+  today=date.today()
+  return render_template("water_re.html", today=today)
+
 @app.route("/elec/bill", methods=['post'])
 def elec_bill():
   data= request.form
@@ -108,6 +119,29 @@ def elec_bill():
 
 
 
+@app.route("/gas/bill", methods=['post'])
+def gas_bill():
+  data= request.form
+  # return jsonify(data)
+  db_data=gas_bill_db(data)
+  
+  units=random.randrange(20,37)
+  price_per_unit=25
+  bill=units * price_per_unit
+
+  curr_date = db_data['curr_date'].strftime('%Y-%m-%d')
+  last_bill_date = db_data['last_bill_date'].strftime('%Y-%m-%d')
+  
+  if (datetime.strptime(curr_date, "%Y-%m-%d")-datetime.strptime(last_bill_date, "%Y-%m-%d")).days >30:
+    update_gas_last_bill_date(data)
+    return render_template('pay_gas_bill.html',db_data=db_data,units=units, price_per_unit=price_per_unit , bill=bill)
+
+  else: 
+    return render_template("no_bill.html")
+
+
+
+
 @app.route("/water/bill", methods=['post'])
 def water_bill():
   data= request.form
@@ -124,10 +158,7 @@ def water_bill():
   else: 
     return render_template("no_bill.html")
 
-@app.route("/water/re")
-def water_re():
-  today=date.today()
-  return render_template("water_re.html", today=today)
+
 
 @app.route("/login/bill_paid")
 def bill_paid():
