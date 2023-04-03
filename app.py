@@ -43,15 +43,43 @@ def dashboard():
 def elec():
   return render_template('elec.html')
 
-@app.route("/login/water")
+@app.route("/login/gas")
 def gas():
+  return render_template('gas.html')
+
+# @app.route("/login/broadband")
+# def broadband():
+#   return render_template('broadband.html')
+
+# @app.route("/login/dth")
+# def dth():
+#   return render_template('dth.html')
+
+# @app.route("/login/mobile")
+# def mobile():
+#   return render_template('mobile.html')
+
+@app.route("/login/water")
+def water():
   return render_template('water.html')
+
+@app.route("/water/first_time")
+def water_first_time():
+  today=date.today()
+  id=random.randrange(1000000,2000000)
+  return render_template('water_first_time.html',today=today,id=id)
 
 @app.route("/elec/first_time")
 def elec_first_time():
   today=date.today()
   id=random.randrange(2000000,3000000)
   return render_template('elec_first_time.html',today=today,id=id)
+
+@app.route("/gas/first_time")
+def gas_first_time():
+  today=date.today()
+  id=random.randrange(3000000,4000000)
+  return render_template('gas_first_time.html',today=today,id=id)
 
 @app.route("/elec/re")
 def elec_re():
@@ -78,11 +106,7 @@ def elec_bill():
   else: 
     return render_template("no_bill.html")
 
-@app.route("/water/first_time")
-def gas_first_time():
-  today=date.today()
-  id=random.randrange(1000000,2000000)
-  return render_template('water_first_time.html',today=today,id=id)
+
 
 @app.route("/water/bill", methods=['post'])
 def water_bill():
