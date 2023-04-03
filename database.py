@@ -49,17 +49,73 @@ def water_bill_db(data):
       
     if len(rows) == 0:
       with engine.connect() as conn:
-        query = text("INSERT INTO water (id, phone, email, last_bill_date) VALUES (:id, :phone, :email, :last_bill_date)")
+        query = text("INSERT INTO water (id, phone, email, curr_date) VALUES (:id, :phone, :email, :curr_date)")
 
         conn.execute(query, { 
                  'id':data['id'],
                  'phone':data['phone'],
                  'email':data['email'],                 
-                 'last_bill_date':data['today'],
+                 'curr_date':data['today'],
                  
         })
         water_bill_db(data)
     
     else:
+      conn.execute(
+          text("update water set curr_date=:today where         phone=:phone"),
+            {"today" : data['today'],
+              "phone": data['phone']}
+      )
       return (rows[0])
 
+
+def update_water_last_bill_date(data):
+  with engine.connect() as conn:
+    conn.execute(
+          text("update water set last_bill_date=:today where         phone=:phone"),
+            {"today" : data['today'],
+              "phone": data['phone']}
+    )
+
+
+def elec_bill_db(data):
+  with engine.connect() as conn:
+    result = conn.execute(
+          text("select * from elec where phone=:phone"),
+            {"phone": data['phone']}
+    )
+    rows = []
+    rows=[dict(zip(result.keys(), row)) for row in result]
+    if len(rows) == 0:
+      with engine.connect() as conn:
+        query = text("INSERT INTO elec (id, phone, email, curr_date) VALUES (:id, :phone, :email, :curr_date)")
+
+        conn.execute(query, { 
+                 'id':data['id'],
+                 'phone':data['phone'],
+                 'email':data['email'],                 
+                 'curr_date':data['today'],
+                 
+        })
+        elec_bill_db(data)
+
+    else:
+      update_curr_date(data)
+      return (rows[0])
+      
+
+def update_elec_last_bill_date(data):
+  with engine.connect() as conn:
+    conn.execute(
+          text("update elec set last_bill_date=:today where         phone=:phone"),
+            {"today" : data['today'],
+              "phone": data['phone']}
+    )
+
+def update_curr_date(data):
+  with engine.connect() as conn:
+    conn.execute(
+          text("update elec set curr_date=:today where         phone=:phone"),
+            {"today" : data['today'],
+              "phone": data['phone']}
+    )
