@@ -79,6 +79,47 @@ def update_water_last_bill_date(data):
 
 
 
+def broadband_bill_db(data):
+  with engine.connect() as conn:
+    result = conn.execute(
+          text("select * from broadband where phone=:phone"),
+            {"phone": data['phone']}
+    )
+    rows = []
+    rows=[dict(zip(result.keys(), row)) for row in result]
+      
+    if len(rows) == 0:
+      with engine.connect() as conn:
+        query = text("INSERT INTO broadband (id, phone, email, curr_date) VALUES (:id, :phone, :email, :curr_date)")
+
+        conn.execute(query, { 
+                 'id':data['id'],
+                 'phone':data['phone'],
+                 'email':data['email'],                 
+                 'curr_date':data['today'],
+                 
+        })
+        broadband_bill_db(data)
+    
+    else:
+      conn.execute(
+          text("update broadband set curr_date=:today where         phone=:phone"),
+            {"today" : data['today'],
+              "phone": data['phone']}
+      )
+      return (rows[0])
+
+
+def update_broadband_last_bill_date(data):
+  with engine.connect() as conn:
+    conn.execute(
+          text("update broadband set last_bill_date=:today where         phone=:phone"),
+            {"today" : data['today'],
+              "phone": data['phone']}
+    )
+
+
+
 def gas_bill_db(data):
   with engine.connect() as conn:
     result = conn.execute(
@@ -99,7 +140,7 @@ def gas_bill_db(data):
                  'curr_date':data['today'],
                  
         })
-        water_bill_db(data)
+        gas_bill_db(data)
     
     else:
       conn.execute(
