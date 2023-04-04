@@ -120,6 +120,47 @@ def update_broadband_last_bill_date(data):
 
 
 
+def dth_bill_db(data):
+  with engine.connect() as conn:
+    result = conn.execute(
+          text("select * from dth where phone=:phone"),
+            {"phone": data['phone']}
+    )
+    rows = []
+    rows=[dict(zip(result.keys(), row)) for row in result]
+      
+    if len(rows) == 0:
+      with engine.connect() as conn:
+        query = text("INSERT INTO dth (id, phone, email, curr_date) VALUES (:id, :phone, :email, :curr_date)")
+
+        conn.execute(query, { 
+                 'id':data['id'],
+                 'phone':data['phone'],
+                 'email':data['email'],                 
+                 'curr_date':data['today'],
+                 
+        })
+        dth_bill_db(data)
+    
+    else:
+      conn.execute(
+          text("update dth set curr_date=:today where         phone=:phone"),
+            {"today" : data['today'],
+              "phone": data['phone']}
+      )
+      return (rows[0])
+
+
+def update_dth_last_bill_date(data):
+  with engine.connect() as conn:
+    conn.execute(
+          text("update dth set last_bill_date=:today where         phone=:phone"),
+            {"today" : data['today'],
+              "phone": data['phone']}
+    )
+
+
+
 def gas_bill_db(data):
   with engine.connect() as conn:
     result = conn.execute(

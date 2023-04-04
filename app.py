@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect
-from database import signup_to_db, login_from_db, water_bill_db, elec_bill_db, gas_bill_db,broadband_bill_db, update_elec_last_bill_date, update_water_last_bill_date, update_gas_last_bill_date, update_broadband_last_bill_date
+from database import signup_to_db, login_from_db, water_bill_db, elec_bill_db, gas_bill_db,broadband_bill_db, dth_bill_db, update_elec_last_bill_date, update_water_last_bill_date, update_gas_last_bill_date, update_broadband_last_bill_date, update_dth_last_bill_date
 import random
 from datetime import date, datetime
 
@@ -51,9 +51,9 @@ def gas():
 def broadband():
   return render_template('broadband.html')
 
-# @app.route("/login/dth")
-# def dth():
-#   return render_template('dth.html')
+@app.route("/login/dth")
+def dth():
+  return render_template('dth.html')
 
 # @app.route("/login/mobile")
 # def mobile():
@@ -88,6 +88,12 @@ def broadband_first_time():
   id=random.randrange(4000000,5000000)
   return render_template('broadband_first_time.html',today=today,id=id)
 
+@app.route("/dth/first_time")
+def dth_first_time():
+  today=date.today()
+  id=random.randrange(5000000,6000000)
+  return render_template('dth_first_time.html',today=today,id=id)
+
 @app.route("/elec/re")
 def elec_re():
   today=date.today()
@@ -108,6 +114,11 @@ def water_re():
 def broadband_re():
   today=date.today()
   return render_template("broadband_re.html", today=today)
+
+@app.route("/dth/re")
+def dth_re():
+  today=date.today()
+  return render_template("dth_re.html", today=today)
 
 @app.route("/elec/bill", methods=['post'])
 def elec_bill():
@@ -187,6 +198,25 @@ def broadband_bill():
 
   else: 
     return render_template("no_bill.html")
+
+
+
+@app.route("/dth/bill", methods=['post'])
+def dth_bill():
+  data= request.form
+  # return jsonify(data)
+  db_data=dth_bill_db(data)
+  
+  curr_date = db_data['curr_date'].strftime('%Y-%m-%d')
+  last_bill_date = db_data['last_bill_date'].strftime('%Y-%m-%d')
+  
+  if (datetime.strptime(curr_date, "%Y-%m-%d")-datetime.strptime(last_bill_date, "%Y-%m-%d")).days >30:
+    update_dth_last_bill_date(data)
+    return render_template('pay_dth_bill.html',db_data=db_data)
+
+  else: 
+    return render_template("no_bill.html")
+
 
 
 
