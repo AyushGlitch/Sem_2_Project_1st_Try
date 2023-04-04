@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect
-from database import signup_to_db, login_from_db, water_bill_db, elec_bill_db, gas_bill_db,broadband_bill_db, dth_bill_db, update_elec_last_bill_date, update_water_last_bill_date, update_gas_last_bill_date, update_broadband_last_bill_date, update_dth_last_bill_date
+from database import signup_to_db, login_from_db, mobile_bill_db, elec_bill_db, gas_bill_db,broadband_bill_db, dth_bill_db, update_elec_last_bill_date, update_mobile_last_bill_date, update_gas_last_bill_date, update_broadband_last_bill_date, update_dth_last_bill_date
 import random
 from datetime import date, datetime
 
@@ -59,9 +59,9 @@ def dth():
 # def mobile():
 #   return render_template('mobile.html')
 
-@app.route("/login/water")
+@app.route("/login/mobile")
 def water():
-  return render_template('water.html')
+  return render_template('mobile.html')
 
 
 @app.route("/elec/first_time")
@@ -76,11 +76,11 @@ def gas_first_time():
   id=random.randrange(3000000,4000000)
   return render_template('gas_first_time.html',today=today,id=id)
 
-@app.route("/water/first_time")
-def water_first_time():
+@app.route("/mobile/first_time")
+def mobile_first_time():
   today=date.today()
   id=random.randrange(1000000,2000000)
-  return render_template('water_first_time.html',today=today,id=id)
+  return render_template('mobile_first_time.html',today=today,id=id)
 
 @app.route("/broadband/first_time")
 def broadband_first_time():
@@ -105,10 +105,10 @@ def gas_re():
   today=date.today()
   return render_template("gas_re.html", today=today)
 
-@app.route("/water/re")
-def water_re():
+@app.route("/mobile/re")
+def mobile_re():
   today=date.today()
-  return render_template("water_re.html", today=today)
+  return render_template("mobile_re.html", today=today)
 
 @app.route("/broadband/re")
 def broadband_re():
@@ -165,18 +165,18 @@ def gas_bill():
 
 
 
-@app.route("/water/bill", methods=['post'])
-def water_bill():
+@app.route("/mobile/bill", methods=['post'])
+def mobile_bill():
   data= request.form
   # return jsonify(data)
-  db_data=water_bill_db(data)
+  db_data=mobile_bill_db(data)
   
   curr_date = db_data['curr_date'].strftime('%Y-%m-%d')
   last_bill_date = db_data['last_bill_date'].strftime('%Y-%m-%d')
   
   if (datetime.strptime(curr_date, "%Y-%m-%d")-datetime.strptime(last_bill_date, "%Y-%m-%d")).days >30:
-    update_water_last_bill_date(data)
-    return render_template('pay_water_bill.html',db_data=db_data)
+    update_mobile_last_bill_date(data)
+    return render_template('pay_mobile_bill.html',db_data=db_data)
 
   else: 
     return render_template("no_bill.html")

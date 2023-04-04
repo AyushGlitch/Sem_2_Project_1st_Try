@@ -38,10 +38,10 @@ def login_from_db(data):
     else:
       return (rows[0])
 
-def water_bill_db(data):
+def mobile_bill_db(data):
   with engine.connect() as conn:
     result = conn.execute(
-          text("select * from water where phone=:phone"),
+          text("select * from mobile where phone=:phone"),
             {"phone": data['phone']}
     )
     rows = []
@@ -49,7 +49,7 @@ def water_bill_db(data):
       
     if len(rows) == 0:
       with engine.connect() as conn:
-        query = text("INSERT INTO water (id, phone, email, curr_date) VALUES (:id, :phone, :email, :curr_date)")
+        query = text("INSERT INTO mobile (id, phone, email, curr_date) VALUES (:id, :phone, :email, :curr_date)")
 
         conn.execute(query, { 
                  'id':data['id'],
@@ -58,21 +58,21 @@ def water_bill_db(data):
                  'curr_date':data['today'],
                  
         })
-        water_bill_db(data)
+        mobile_bill_db(data)
     
     else:
       conn.execute(
-          text("update water set curr_date=:today where         phone=:phone"),
+          text("update mobile set curr_date=:today where         phone=:phone"),
             {"today" : data['today'],
               "phone": data['phone']}
       )
       return (rows[0])
 
 
-def update_water_last_bill_date(data):
+def update_mobile_last_bill_date(data):
   with engine.connect() as conn:
     conn.execute(
-          text("update water set last_bill_date=:today where         phone=:phone"),
+          text("update mobile set last_bill_date=:today where         phone=:phone"),
             {"today" : data['today'],
               "phone": data['phone']}
     )
