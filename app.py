@@ -223,6 +223,10 @@ def dth_bill():
 @app.route("/login/bill_paid")
 def bill_paid():
   return render_template('bill_paid.html')
+
+@app.route("/contact")
+def contact():
+  return render_template('contact.html')
   
 
 if __name__ =='__main__':
