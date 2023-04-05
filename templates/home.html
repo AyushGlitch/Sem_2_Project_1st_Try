@@ -5,16 +5,86 @@
     <link rel='stylesheet' href='/static/home.css' />
     {% include 'bootstrap.html' %}
 
+    <!--   Google Fonts start   -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!--   Google Fonts end   -->
     
   </head>
 
   <body>
     {% include 'nav1.html' %}
+
+    <div class="container my_container">
+      <h1>Welcome to AIOUP</h1>
+      <h3>A one stop solution to all your utility bill payment needs</h3>
+      <p>Please Login to get started</p>
+    </div>
     
   </body>
-  <style>
-      body {
-        background: red;
-      }
-    </style>
+
+  
+<!--  My CSS  -->
+<style>
+
+ul, li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+html { height: 100%; }
+
+:root {
+    --clr-gradient: linear-gradient(45deg, rgba(105,226,221,1) 5%, rgba(90,121,228,1) 50%, rgba(225,92,226,1) 95%);
+    --clr-secondary: #606060;
+}
+
+body {
+    background: rgb(105,226,221);
+    background: var(--clr-gradient);
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    cursor: default;
+}
+
+h1, h2, h3, p, a {color: inherit;}
+
+.my_container {
+  background-color: #f4f4f4;
+  margin-top: 3rem;
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+h3 {
+  font-size: 1.4rem;
+  color: #36454F;
+}
+
+p {
+  margin-top: 5rem;
+  color: #848884;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+  .my_container {
+    background: none;
+  }
+  h1, h3, p {color: #f1f1f1;}
+}
+    
+</style>
+<!-- CSS Ends -->
+
+
 </html>
