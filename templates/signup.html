@@ -6,50 +6,55 @@
   </head>
   <body>
     {% include 'nav2.html' %}
+
+    <div class="container">
     
-    <h1 class="text-center mt-4 mb-4">Sign-Up Form</h1>
+    <h1>Register</h1>
     
     <form action="/signup/apply" method="post">      
       
-      <div class="container mt-4 mb-4">
+      <div class="field">
         <label>Full Name</label><br>
         <input type="text" required name="full_name" placeholder="Bruce Wayne">
       </div>
   
-      <div class="container mt-4 mb-4">
+      <div class="field">
         <label>Email</label><br>
         <input type="email" required name="email" placeholder="bruce@wayne.com">
       </div>
 
-      <div class="container mt-4 mb-4">
+      <div class="field">
         <label>Username</label><br>
         <input type="text" required name="username" placeholder="batman">
       </div>
 
-      <div class="container mt-4 mb-4">
+      <div class="field">
         <label>Password</label><br>
         <input type="password" required id="pwd" name="pwd">
       </div>
       
-      <div class="container mt-4 mb-4">
+      <div class="field">
         <label>Mobile Number</label><br>
         <input type="tel" required name="phone" placeholder="123-456-7890" pattern="[0-9]{3}[0-9]{4}[0-9]{3}" >
       </div>
 
-      <div class="container mt-4 mb-4">
-        <label>Account Number</label><br>
+      <div class="field">
+        <label>Bank Account Number</label><br>
         <input type="text" required name="account_no">
       </div>
 
-      <div class="container mt-4 mb-4">
+      <div class="field">
         <label>Account Password</label><br>
         <input type="password" required id="pwd" name="account_pwd">
       </div>
 
-      <div class="container mt-4 mb-4">
-        <input type="submit">
-      </div>
+
+      <input type="submit" value="SIGNUP">
+
+    
     </form>
+
+    </div>
     
   </body>
 </html>
