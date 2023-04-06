@@ -3,58 +3,171 @@
   <head>
     {% include 'bootstrap.html' %}
     <title>Sign Up</title>
+
+    <!--   Google Fonts   -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
   </head>
   <body>
     {% include 'nav2.html' %}
 
     <div class="container">
-    
-    <h1>Register</h1>
-    
-    <form action="/signup/apply" method="post">      
-      
-      <div class="field">
-        <label>Full Name</label><br>
-        <input type="text" required name="full_name" placeholder="Bruce Wayne">
-      </div>
+      <div class="register_container">
+        <h1>Register</h1>
+        
+        <form action="/signup/apply" method="post">      
+          <div class="grid_layout">
+            <!-- Left Side -->
+            <div class="left">
+              <div class="field">
+                <label>Full Name</label><br>
+                <input type="text" required name="full_name" placeholder="Bruce Wayne">
+              </div>
+          
+              <div class="field">
+                <label>Email</label><br>
+                <input type="email" required name="email" placeholder="bruce@wayne.com">
+              </div>
+        
+              <div class="field">
+                <label>Username</label><br>
+                <input type="text" required name="username" placeholder="batman">
+              </div>
+        
+              <div class="field">
+                <label>Password</label><br>
+                <input type="password" required id="pwd" name="pwd" placeholder="Create a new Password">
+              </div>
+            </div>
   
-      <div class="field">
-        <label>Email</label><br>
-        <input type="email" required name="email" placeholder="bruce@wayne.com">
-      </div>
+            <!-- Right Side -->
+            <div class="right">
+              <div class="field">
+                <label>Mobile Number</label><br>
+                <input type="tel" required name="phone" placeholder="123-456-7890" pattern="[0-9]{3}[0-9]{4}[0-9]{3}" >
+              </div>
+        
+              <div class="field">
+                <label>Bank Account Number</label><br>
+                <input type="text" required name="account_no" placeholder="Account Number">
+              </div>
+        
+              <div class="field">
+                <label>Account Password</label><br>
+                <input type="password" required id="pwd" name="account_pwd">
+              </div>
+            </div>
 
-      <div class="field">
-        <label>Username</label><br>
-        <input type="text" required name="username" placeholder="batman">
-      </div>
-
-      <div class="field">
-        <label>Password</label><br>
-        <input type="password" required id="pwd" name="pwd">
-      </div>
-      
-      <div class="field">
-        <label>Mobile Number</label><br>
-        <input type="tel" required name="phone" placeholder="123-456-7890" pattern="[0-9]{3}[0-9]{4}[0-9]{3}" >
-      </div>
-
-      <div class="field">
-        <label>Bank Account Number</label><br>
-        <input type="text" required name="account_no">
-      </div>
-
-      <div class="field">
-        <label>Account Password</label><br>
-        <input type="password" required id="pwd" name="account_pwd">
-      </div>
-
-
-      <input type="submit" value="SIGNUP">
-
+          </div>
     
-    </form>
-
+          <input type="submit" value="SIGNUP">
+    
+        
+        </form>
+      </div>
     </div>
     
   </body>
+
+
+
+<!--  My CSS  -->
+<style>
+
+html, body { min-height: 100%; }
+
+:root {
+    --clr-gradient: linear-gradient(45deg, rgba(105,226,221,1) 5%, rgba(90,121,228,1) 50%, rgba(225,92,226,1) 95%);
+    --clr-secondary: #606060;
+}
+
+body {
+    background: rgb(105,226,221);
+    background: var(--clr-gradient);
+    font-family: 'Roboto', sans-serif;
+    cursor: default;
+}
+
+h1, h2, h3, p, a {text-decoration: none; color: inherit;}
+
+h1 {
+  font-family: 'Delicious Handrawn', cursive;
+  font-size: 3rem;
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.register_container {
+    margin: auto;
+    margin-top: 5rem;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 0 2.5rem;
+    border-radius: 10px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field label {
+    font-size: .925rem;
+    margin-bottom: .3rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    color: var(--clr-secondary);
+}
+
+.field input {
+    padding: .65rem .5rem;
+    border: none;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+input[type=submit] {
+    margin: 3rem 0;
+    display: block;
+    width: 100%;
+    padding: .625rem 0;
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 1px;   
+    background: rgb(105,226,221);
+    background: linear-gradient(90deg, rgba(105,226,221,1) 5%, rgba(90,121,228,1) 50%, rgba(225,92,226,1) 95%);
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background: rgba(90,121,228,1);
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    transition: all 200ms ease-in-out;
+}
+
+.grid_layout {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+@media (max-width: 550px) {
+    .register_container{ margin-top: 0; height: 100%; width: auto; border-radius: 0; }
+    .grid_layout {
+      flex-direction: column;
+    }
+}
+    
+</style>
+<!-- CSS Ends -->
+
+
+
+
 </html>
