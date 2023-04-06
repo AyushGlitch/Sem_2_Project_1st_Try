@@ -3,53 +3,129 @@
   <head>
     {% include 'bootstrap.html' %}
     <title>Contact Us</title>
+
+    <!--   Google Fonts   -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
   </head>
   <body>
     {% include 'nav1.html' %}
-    
-    <h1 class="text-center mt-4 mb-4">Contact Us</h1>
-    <br>
-    <div class="container">
-      <b>Ayush Aryan Singh</b>
-      <div class="mb-2">
-        <b>Email:</b> 221210026@nitdelhi.ac.in
-      </div>
-      <div class="mb-2">
-        <b>Phone:</b> 83681XXXXX
-      </div>
-    </div>
 
-    <br>
-    <div class="container">
-      <b>Abhishek Tripathi</b>
-      <div class="mb-2">
-        <b>Email:</b> 221210006@nitdelhi.ac.in
+    <div class="container my_container">
+      <h1>Contact Us</h1>
+      
+      <div class="person">
+        <b>Ayush Aryan Singh</b>
+        <div class="mb-2">
+          <span>Email:</span> 221210026@nitdelhi.ac.in
+        </div>
+        <div class="mb-2">
+          <span>Phone:</span> 83681XXXXX
+        </div>
       </div>
-      <div class="mb-2">
-        <b>Phone:</b> 63999XXXXX
+  
+      <div class="person">
+        <b>Abhishek Tripathi</b>
+        <div class="mb-2">
+          <span>Email:</span> 221210006@nitdelhi.ac.in
+        </div>
+        <div class="mb-2">
+          <span>Phone:</span> 63999XXXXX
+        </div>
       </div>
-    </div>
+  
+      <div class="person">
+        <b>Aditya Sharma</b>
+        <div class="mb-2">
+          <span>Email:</span> 221210011@nitdelhi.ac.in
+        </div>
+        <div class="mb-2">
+          <span>Phone:</span> 98716XXXXX
+        </div>
+      </div>
+  
+      <div class="person">
+        <b>Anshul Patidar</b>
+        <div class="mb-2">
+          <span>Email:</span> 221210022@nitdelhi.ac.in
+        </div>
+        <div class="mb-2">
+          <span>Phone:</span> 87428XXXXX
+        </div>
+      </div>
 
-    <br>
-    <div class="container">
-      <b>Aditya Sharma</b>
-      <div class="mb-2">
-        <b>Email:</b> 221210011@nitdelhi.ac.in
-      </div>
-      <div class="mb-2">
-        <b>Phone:</b> 98716XXXXX
-      </div>
     </div>
-
-    <br>
-    <div class="container">
-      <b>Anshul Patidar</b>
-      <div class="mb-2">
-        <b>Email:</b> 221210022@nitdelhi.ac.in
-      </div>
-      <div class="mb-2">
-        <b>Phone:</b> 87428XXXXX
-      </div>
-    </div>
+  
+  
   </body>
+
+
+
+<!--  My CSS  -->
+<style>
+
+html, body { min-height: 100%; }
+
+:root {
+    --clr-gradient: linear-gradient(45deg, rgba(105,226,221,1) 5%, rgba(90,121,228,1) 50%, rgba(225,92,226,1) 95%);
+    --clr-secondary: #606060;
+}
+
+body {
+    background: rgb(105,226,221);
+    background: var(--clr-gradient);
+    font-family: 'Roboto', sans-serif;
+    cursor: default;
+}
+
+h1, h2, h3, p, a {text-decoration: none; color: inherit;}
+
+h1 {
+  font-family: 'Delicious Handrawn', cursive;
+  color: #fff;
+  font-size: 3rem;
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.my_container {
+    margin: auto;
+    margin-top: 5rem;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0,0,0,.2);
+/*     padding: 0 2.5rem; */
+    border-radius: 10px;
+}
+
+.person {
+  background-color: rgba(255, 255, 255, .2);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.person span {
+  font-weight: 700;
+  margin-right: .4rem;
+}
+
+.person:hover {
+  background-color: #fff;
+  color: #000;
+  transition: 200ms ease-out;
+}
+
+    
+</style>
+<!-- CSS Ends -->
+
+
+
+
 </html>
